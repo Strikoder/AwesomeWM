@@ -5,12 +5,23 @@ I've recently transitioned to using Linux and Neovim (big thanks to ThePrimeagen
 ## Getting Started
 To use this configuration:
 
-1. **Fork this Repository**: Start by forking this repo to make your own copy.
+0. Install awesomeWM!
 
-2. **Move Files to Awesome Directory**:
-   - Navigate to your `.config` directory.
-   - If an `awesome` directory doesn't exist, create it.
-   - Move the files from this repo into the `.config/awesome` directory.
+1. **Create the Awesome Directory**:
+   - Run the following command to create the `awesome` directory in your `.config` directory, if it doesn't already exist:
+     ```bash
+     mkdir -p ~/.config/awesome
+     ```
+
+2. **Clone the Repository**:
+   - Change into the newly created `awesome` directory:
+     ```bash
+     cd ~/.config/awesome
+     ```
+   - Clone the repository directly into this directory:
+     ```bash
+     git clone https://github.com/Strikoder/AwesomeWM .
+     ```
 
 ## Configuration Details
 
