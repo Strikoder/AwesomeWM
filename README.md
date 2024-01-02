@@ -10,6 +10,7 @@ I've recently transitioned to using Linux and Neovim (big thanks to ThePrimeagen
    Vertical monitor
   <img src="https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/SecondMonitor.png?raw=true" alt="Second monitor"/>
 </p>
+
 ## Getting Started
 To use this configuration:
 
