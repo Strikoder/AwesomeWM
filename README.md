@@ -2,8 +2,14 @@
 Welcome to my AwesomeWM configuration repository! This setup is tailored for a dual-monitor setup and includes a range of gadgets that enhance the AwesomeWM experience. 
 I've recently transitioned to using Linux and Neovim (big thanks to ThePrimeagen! ❤️). So plz do not judge me, as I'm still exploring and learning :3
 
-![First monitor](https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/FirstMonitor.png?raw=true)
-![Second monitor](https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/SecondMonitor.png?raw=true)
+
+
+<p align="center">
+   Horizontal monitor
+  <img src="https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/FirstMonitor.png?raw=true" alt="First monitor" style="margin-right: 10px;"/>
+   Vertical monitor
+  <img src="https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/SecondMonitor.png?raw=true" alt="Second monitor"/>
+</p>
 ## Getting Started
 To use this configuration:
 
