@@ -538,6 +538,9 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 --- AMIN
 
+-- Add keyboard layouts
+awful.spawn("setxkbmap -layout us,ru,ar -option 'grp:alt_shift_toggle'")
+
 -- Prevent from sleeping
 awful.spawn("xset s off")
 awful.spawn("xset -dpms")
@@ -551,9 +554,11 @@ awful.spawn("feh --bg-fill /media/strikoder/Github/sys/wallpaper/bg1.jpg --bg-fi
 
 -- Terminal with commands
 local first_screen = screen[0]
+---- Customized for my second monitor
 local thrid_tag = awful.tag.find_by_name(first_screen, "terminal")
 mouse.screen = screen.primary
 mouse.coords({ x = 800, y = 500 })
+
 awful.spawn.with_shell("gnome-terminal -- bash -c 'neofetch; exec bash'", { tag = thrid_tag })
 awful.spawn.with_shell("gnome-terminal -- bash -c 'cmatrix; exec bash'", { tag = thrid_tag })
 awful.spawn.with_shell("gnome-terminal -- bash -c 'htop; exec bash'", { tag = thrid_tag })
