@@ -28,7 +28,7 @@ To use this configuration:
      ```
    - Clone the repository directly into this directory:
      ```bash
-     git clone https://github.com/Strikoder/AwesomeWM .
+     git clone https://github.com/Strikoder/AwesomeWM
      ```
 
 ## Configuration Details
