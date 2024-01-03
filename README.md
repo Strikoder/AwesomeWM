@@ -46,5 +46,5 @@ This setup is designed for a dual-monitor arrangement:
 For the full experience, install the following packages:
 
 ``` bash
-sudo apt install neofetch htop cmatrix neovim maim nitrogen
+sudo apt install neofetch htop cmatrix neovim maim
 ```
