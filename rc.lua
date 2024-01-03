@@ -549,7 +549,7 @@ awful.spawn("xset s noblank")
 -- Autostart Applications
 awful.spawn.with_shell("compton")
 awful.spawn.with_shell("xrandr --output HDMI-0 --rotate right")
-awful.spawn("feh --bg-fill /media/strikoder/Github/sys/wallpaper/bg1.jpg --bg-fill /media/strikoder/Github/sys/wallpaper/bg2.jpg")
+awful.spawn("feh --bg-fill /media/Github/sys/wallpaper/bg1.jpg --bg-fill /media/Github/sys/wallpaper/bg2.jpg")
 
 
 -- Terminal with commands
