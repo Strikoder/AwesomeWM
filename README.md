@@ -3,48 +3,68 @@ Welcome to my AwesomeWM configuration repository! This setup is tailored for a d
 I've recently transitioned to using Linux and Neovim (big thanks to ThePrimeagen! ❤️). So plz do not judge me, as I'm still exploring and learning :3
 
 
+Horizontal monitor
 
-<p align="center">
-   Horizontal monitor
-  <img src="https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/FirstMonitor.png?raw=true" alt="First monitor" style="margin-right: 10px;"/>
-   Vertical monitor
-  <img src="https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/SecondMonitor.png?raw=true" alt="Second monitor"/>
-</p>
+![Horizontal monitor](https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/FirstMonitor.png)
+
+Vertical monitor
+
+![Vertical monitor](https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/SecondMonitor.png)
 
 ## Getting Started
-To use this configuration:
+Here's how you can set up my AwesomeWM configuration:
 
-0. Install awesomeWM!
+### 1. Installation of AwesomeWM
+First, make sure you have AwesomeWM installed on your system.
 
-1. **Create the Awesome Directory**:
-   - Run the following command to create the `awesome` directory in your `.config` directory, if it doesn't already exist:
+### 2. Setting Up the Environment
+- **Create the Awesome Directory**:
+   - If it doesn't exist, create an `awesome` directory in your `.config` directory:
      ```bash
      mkdir -p ~/.config/awesome
      ```
 
-2. **Clone the Repository**:
-   - Change into the newly created `awesome` directory:
+- **Clone the Repository**:
+   - Navigate to the `awesome` directory:
      ```bash
      cd ~/.config/awesome
      ```
-   - Clone the repository directly into this directory:
+   - Clone the repository here:
      ```bash
      git clone https://github.com/Strikoder/AwesomeWM
      ```
 
-## Configuration Details
+## Configuration Insights
 
-This setup is designed for a dual-monitor arrangement:
+This setup is optimized for the following monitor configuration:
 
-- **Primary Monitor**: Vertical 1600x2560
-- **Secondary Monitor**: Horizontal 1920x1080
+- **Primary Monitor**: Vertical orientation (1600x2560)
+- **Secondary Monitor**: Horizontal orientation (1920x1080)
 
-**Note for Single Monitor Users**: If you're using a single monitor, you'll need to edit and omit certain parts of the configuration. Look for comments marked with `---- 2 monitor` to identify these sections.
+**For Single Monitor Users**: Should you be using a single monitor setup, some tweaks are necessary. Look for comments tagged as `---- 2 monitor` in the configuration files for guidance on adjustments.
 
-## Required Packages
 
-For the full experience, install the following packages:
+## Essential Packages
+
+To fully enjoy this setup, ensure these packages are installed:
 
 ``` bash
 sudo apt install neofetch htop cmatrix neovim maim
+```
+
+## Setting Up Zsh (Optional)
+If you'd like to use my Zsh configuration:
+
+### 1. Install Zsh and Oh My Zsh:
+Follow the installation instructions for Zsh and Oh My Zsh.
+
+### 2. Move the Zsh Configuration:
+- **Place the .zshrc file in your home directory**:
+  ```bash
+  mv .zshrc /home/strikoder/.zshrc
+  ```
+
+## Note for Beginners: If you're new and find Zsh overwhelming, feel free to remove the .zshrc file after cloning the repository:
+```bash
+rm .zshrc
 ```
