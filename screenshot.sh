@@ -14,9 +14,15 @@ filepath="$screenshot_dir/$filename"
 
 # Geometry of the main monitor (replace with your monitor's geometry)
 geometry="1920x1080+0+0"
-
-# Use maim to take a screenshot of the main monitor and save it to the specified path
-maim -g "$geometry" "$filepath"
+# Use slop to select a region and maim to take a screenshot
+selection=$(slop -f "%g")
+if [ -z "$selection" ]; then
+    # If no selection is made, capture the entire screen
+    maim -g "$geometry" "$filepath"
+else
+    # If a selection is made, capture the selected area
+    maim -g "$selection" "$filepath"
+fi
 
 # Notify the user
 notify-send "Screenshot taken" "Saved as $filename"
