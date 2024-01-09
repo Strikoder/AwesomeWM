@@ -1,9 +1,8 @@
 --- My custom
-local batteryarc_widget = require("batteryarc-widget.batteryarc")
 local brightness_widget = require("brightness-widget.brightness")
 local cpu_widget = require("cpu-widget.cpu-widget")
 local volume_widget = require("volume-widget.volume")
-
+local battery_widget = require("widget.battery.init")
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
@@ -76,8 +75,6 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- {{{ Menu
--- Create a launcher widget and a main menu
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -190,8 +187,6 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         {             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
             volume_widget {
                 widget_type = 'arc'
             },
@@ -207,10 +202,9 @@ awful.screen.connect_for_each_screen(function(s)
                 step_spacing = 0,
                 color = '#FFFFFF'
             }),
-            batteryarc_widget({
-                show_current_level = true,
-                arc_thickness = 1,
-            }),
+            mykeyboardlayout,
+            battery_widget,
+            wibox.widget.systray(),
             s.mylayoutbox,
         },
     }
@@ -464,7 +458,7 @@ awful.rules.rules = {
     {
         rule_any = {
             instance = {
-                "DTA", -- Firefox addon DownThemAll.
+                "DTA",   -- Firefox addon DownThemAll.
                 "copyq", -- Includes session name in class.
                 "pinentry",
             },
@@ -473,7 +467,7 @@ awful.rules.rules = {
                 "Blueman-manager",
                 "Gpick",
                 "Kruler",
-                "MessageWin", -- kalarm.
+                "MessageWin",  -- kalarm.
                 "Sxiv",
                 "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
                 "Wpa_gui",
@@ -486,9 +480,9 @@ awful.rules.rules = {
                 "Event Tester", -- xev.
             },
             role = {
-                "AlarmWindow", -- Thunderbird's calendar.
+                "AlarmWindow",   -- Thunderbird's calendar.
                 "ConfigManager", -- Thunderbird's about:config.
-                "pop-up",  -- e.g. Google Chrome's (detached) Developer Tools.
+                "pop-up",        -- e.g. Google Chrome's (detached) Developer Tools.
             }
         },
         properties = { floating = true }
@@ -565,3 +559,4 @@ awful.spawn.with_shell("gnome-terminal -- zsh -c 'htop; exec bash'", { tag = thr
 
 -- Gaps between windows
 beautiful.useless_gap = 5
+awful.util.spawn("usr/bin/nm-applet")
