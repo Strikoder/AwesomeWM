@@ -13,7 +13,7 @@ local spawn = require("awful.spawn")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local watch = require("awful.widget.watch")
-local utils = require("volume-widget.utils")
+local utils = require("widget.volume-widget.utils")
 
 local LIST_DEVICES_CMD = [[sh -c "pacmd list-sinks; pacmd list-sources"]]
 local function GET_VOLUME_CMD(card, device, mixctrl, value_type)
@@ -21,40 +21,40 @@ local function GET_VOLUME_CMD(card, device, mixctrl, value_type)
 end
 local function INC_VOLUME_CMD(card, device, mixctrl, value_type, step)
 	return "amixer -c "
-		.. card
-		.. " -D "
-		.. device
-		.. " sset "
-		.. mixctrl
-		.. " "
-		.. value_type
-		.. " "
-		.. step
-		.. "%+"
+	    .. card
+	    .. " -D "
+	    .. device
+	    .. " sset "
+	    .. mixctrl
+	    .. " "
+	    .. value_type
+	    .. " "
+	    .. step
+	    .. "%+"
 end -- luacheck: ignore
 local function DEC_VOLUME_CMD(card, device, mixctrl, value_type, step)
 	return "amixer -c "
-		.. card
-		.. " -D "
-		.. device
-		.. " sset "
-		.. mixctrl
-		.. " "
-		.. value_type
-		.. " "
-		.. step
-		.. "%-"
+	    .. card
+	    .. " -D "
+	    .. device
+	    .. " sset "
+	    .. mixctrl
+	    .. " "
+	    .. value_type
+	    .. " "
+	    .. step
+	    .. "%-"
 end -- luacheck: ignore
 local function TOG_VOLUME_CMD(card, device, mixctrl)
 	return "amixer -c " .. card .. " -D " .. device .. " sset " .. mixctrl .. " toggle"
 end -- luacheck: ignore
 
 local widget_types = {
-	icon_and_text = require("volume-widget.widgets.icon-and-text-widget"),
-	icon = require("volume-widget.widgets.icon-widget"),
-	arc = require("volume-widget.widgets.arc-widget"),
-	horizontal_bar = require("volume-widget.widgets.horizontal-bar-widget"),
-	vertical_bar = require("volume-widget.widgets.vertical-bar-widget"),
+	icon_and_text = require("widget.volume-widget.widgets.icon-and-text-widget"),
+	icon = require("widget.volume-widget.widgets.icon-widget"),
+	arc = require("widget.volume-widget.widgets.arc-widget"),
+	horizontal_bar = require("widget.volume-widget.widgets.horizontal-bar-widget"),
+	vertical_bar = require("widget.volume-widget.widgets.vertical-bar-widget"),
 }
 local volume = {}
 

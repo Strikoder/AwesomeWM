@@ -1,7 +1,7 @@
 --- My custom
-local brightness_widget = require("brightness-widget.brightness")
-local cpu_widget = require("cpu-widget.cpu-widget")
-local volume_widget = require("volume-widget.volume")
+local brightness_widget = require("widget.brightness-widget.brightness")
+local cpu_widget = require("widget.cpu-widget.cpu-widget")
+local volume_widget = require("widget.volume-widget.volume")
 local battery_widget = require("widget.battery.init")
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
@@ -147,7 +147,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     --- Each screen has its own tag table.
-    awful.tag({ "</>", "www", ">_", "#", "ⓕ" }, s, awful.layout.layouts[1])
+    awful.tag({ "</>", "www", ">_", "#", "ⓕ " }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -542,7 +542,7 @@ awful.spawn("xset s noblank")
 
 -- Autostart Applications
 awful.spawn.with_shell("compton")
-awful.spawn.with_shell("xrandr --output HDMI-0 --rotate right")
+awful.spawn.with_shell("xrandr --output HDMI-0 --rotate right; sleep 1")
 awful.spawn("feh --bg-fill /media/Github/sys/wallpaper/bg1.jpg --bg-fill /media/Github/sys/wallpaper/bg2.jpg")
 
 
@@ -559,4 +559,3 @@ awful.spawn.with_shell("gnome-terminal -- zsh -c 'htop; exec bash'", { tag = thr
 
 -- Gaps between windows
 beautiful.useless_gap = 5
-awful.util.spawn("usr/bin/nm-applet")
