@@ -1,12 +1,10 @@
-modkey = "Mod4"
-
-
---- CUSTOM
-
+--- My custom
 local brightness_widget = require("widget.brightness-widget.brightness")
 local cpu_widget = require("widget.cpu-widget.cpu-widget")
 local volume_widget = require("widget.volume-widget.volume")
 local battery_widget = require("widget.battery.init")
+-- If LuaRocks is installed, make sure that packages installed through it are
+-- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
 -- Standard awesome library
@@ -60,19 +58,74 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "gnome-terminal"
-editor = os.getenv("nvim") or "vs-code"
+editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
+-- Default modkey.
+-- Usually, Mod4 is the key with a logo between Control and Alt.
+-- If you do not like this or do not have such a key,
+-- I suggest you to remap Mod4 to another key using xmodmap or other tools.
+-- However, you can use another modifier like Mod1, but it may interact with others.
+modkey = "Mod4"
 
+--- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
 }
+-- }}}
+
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
+-- Keyboard map indicator and switcher
+mykeyboardlayout = awful.widget.keyboardlayout()
+
+-- {{{ Wibar
+-- Create a textclock widget
+mytextclock = wibox.widget.textclock()
+
+-- Create a wibox for each screen and add it
+local taglist_buttons = gears.table.join(
+    awful.button({}, 1, function(t) t:view_only() end),
+    awful.button({ modkey }, 1, function(t)
+        if client.focus then
+            client.focus:move_to_tag(t)
+        end
+    end),
+    awful.button({}, 3, awful.tag.viewtoggle),
+    awful.button({ modkey }, 3, function(t)
+        if client.focus then
+            client.focus:toggle_tag(t)
+        end
+    end),
+    awful.button({}, 4, function(t) awful.tag.viewnext(t.screen) end),
+    awful.button({}, 5, function(t) awful.tag.viewprev(t.screen) end)
+)
+
+local tasklist_buttons = gears.table.join(
+    awful.button({}, 1, function(c)
+        if c == client.focus then
+            c.minimized = true
+        else
+            c:emit_signal(
+                "request::activate",
+                "tasklist",
+                { raise = true }
+            )
+        end
+    end),
+    awful.button({}, 3, function()
+        awful.menu.client_list({ theme = { width = 250 } })
+    end),
+    awful.button({}, 4, function()
+        awful.client.focus.byidx(1)
+    end),
+    awful.button({}, 5, function()
+        awful.client.focus.byidx(-1)
+    end))
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -94,7 +147,72 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     --- Each screen has its own tag table.
-    awful.tag({ "</>", "www", ">_", "#", "ⓕ " }, s, awful.layout.layouts[1])
+    awful.tag({ "</>", "www", ">_", "#", "" }, s, awful.layout.layouts[1])
+
+    -- Create a promptbox for each screen
+    s.mypromptbox = awful.widget.prompt()
+    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
+    -- We need one layoutbox per screen.
+    s.mylayoutbox = awful.widget.layoutbox(s)
+    s.mylayoutbox:buttons(gears.table.join(
+        awful.button({}, 1, function() awful.layout.inc(1) end),
+        awful.button({}, 3, function() awful.layout.inc(-1) end),
+        awful.button({}, 4, function() awful.layout.inc(1) end),
+        awful.button({}, 5, function() awful.layout.inc(-1) end)))
+    -- Create a taglist widget
+    s.mytaglist = awful.widget.taglist {
+        screen  = s,
+        filter  = awful.widget.taglist.filter.all,
+        buttons = taglist_buttons
+    }
+
+    -- Create a tasklist widget
+    s.mytasklist = awful.widget.tasklist {
+        screen  = s,
+        filter  = awful.widget.tasklist.filter.currenttags,
+        buttons = tasklist_buttons
+    }
+
+    -- Create the wibox
+    s.mywibox = awful.wibar({ position = "top", screen = s })
+
+    -- Add widgets to the wibox
+    s.mywibox:setup {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+            s.mytaglist,
+            s.mypromptbox,
+        },
+        s.mytasklist, -- Middle widget
+        {             -- Right widgets
+            layout = wibox.layout.fixed.horizontal,
+            volume_widget {
+                widget_type = 'arc'
+            },
+            mytextclock,
+            brightness_widget {
+                type = 'icon_and_text',
+                program = 'xbacklight',
+                step = 2,
+            },
+            cpu_widget({
+                width = 70,
+                step_width = 2,
+                step_spacing = 0,
+                color = '#FFFFFF'
+            }),
+            mykeyboardlayout,
+            battery_widget,
+            wibox.widget.systray(),
+            s.mylayoutbox,
+        },
+    }
+    --- To start on thrid tag
+    local tag = s.tags[3]
+    if tag then
+        tag:view_only()
+    end
 end)
 -- }}}
 
@@ -186,6 +304,17 @@ globalkeys = gears.table.join(
         { description = "restore minimized", group = "client" }),
 
 
+
+    awful.key({ modkey }, "x",
+        function()
+            awful.prompt.run {
+                prompt       = "Run Lua code: ",
+                textbox      = awful.screen.focused().mypromptbox.widget,
+                exe_callback = awful.util.eval,
+                history_path = awful.util.get_cache_dir() .. "/history_eval"
+            }
+        end,
+        { description = "lua execute prompt", group = "awesome" }),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
         { description = "show the menubar", group = "launcher" })
@@ -383,19 +512,24 @@ client.connect_signal("manage", function(c)
 end)
 
 
+
+
+-- Enable sloppy focus, so that focus follows mouse.
+client.connect_signal("mouse::enter", function(c)
+    c:emit_signal("request::activate", "mouse_enter", { raise = false })
+end)
+
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
 
---- CUSTOM
+--- AMIN
 
--- Polybar
-awful.spawn.with_shell("~/.config/awesome/polybar.sh")
 -- Add keyboard layouts
 awful.spawn("setxkbmap -layout us,ru,ar -option 'grp:alt_shift_toggle'")
 
--- Prevent screen from sleeping
+-- Prevent from sleeping
 awful.spawn("xset s off")
 awful.spawn("xset -dpms")
 awful.spawn("xset s noblank")
@@ -403,7 +537,7 @@ awful.spawn("xset s noblank")
 -- Autostart Applications
 awful.spawn.with_shell("compton")
 awful.spawn.with_shell("xrandr --output HDMI-0 --rotate right; sleep 1")
-awful.spawn("feh --bg-fill /media/Github/sys/wallpaper/bg1.jpg --bg-fill /media/Github/sys/wallpaper/bg2.jpg") ---- 2 monitor
+awful.spawn("feh --bg-fill /media/Github/sys/wallpaper/bg1.jpg --bg-fill /media/Github/sys/wallpaper/bg2.jpg")
 
 
 -- Terminal with commands
@@ -416,14 +550,6 @@ mouse.coords({ x = 800, y = 500 })
 awful.spawn.with_shell("gnome-terminal -- zsh -c 'neofetch; exec bash'", { tag = thrid_tag })
 awful.spawn.with_shell("gnome-terminal -- zsh -c 'cmatrix; exec bash'", { tag = thrid_tag })
 awful.spawn.with_shell("gnome-terminal -- zsh -c 'htop; exec bash'", { tag = thrid_tag })
-awful.spawn.with_shell("nm-applet")
+
 -- Gaps between windows
 beautiful.useless_gap = 5
-
-
---- Might Need Later
-
--- Enable sloppy focus, so that focus follows mouse.
---client.connect_signal("mouse::enter", function(c)
---    c:emit_signal("request::activate", "mouse_enter", { raise = false })
--- end)
