@@ -170,11 +170,16 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+        style   = {
+            bg_normal = "#000000AA", -- Fully transparent background
+            bg_focus = "#00000AA",   -- Fully transparent background
+            -- Other styling properties...
+        },
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, bg = "#000000AA" })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
