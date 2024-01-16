@@ -1,12 +1,9 @@
 --- My custom
+pcall(require, "luarocks.loader")
 local brightness_widget = require("widget.brightness-widget.brightness")
 local cpu_widget = require("widget.cpu-widget.cpu-widget")
 local volume_widget = require("widget.volume-widget.volume")
 local battery_widget = require("widget.battery.init")
--- If LuaRocks is installed, make sure that packages installed through it are
--- found (e.g. lgi). If LuaRocks is not installed, do nothing.
-pcall(require, "luarocks.loader")
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -61,11 +58,6 @@ terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
 --- Table of layouts to cover with awful.layout.inc, order matters.
@@ -73,12 +65,9 @@ awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
 }
--- }}}
-
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
 
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
@@ -147,7 +136,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     --- Each screen has its own tag table.
-    awful.tag({ "</>", "www", ">_", "#", "" }, s, awful.layout.layouts[1])
+    awful.tag({ "●", "●", "●", "●", "●", "●" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -184,13 +173,15 @@ awful.screen.connect_for_each_screen(function(s)
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
-        { -- Left widgets
+        {
+            -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            s.mytaglist,
             s.mypromptbox,
+            s.mytasklist,
         },
-        s.mytasklist, -- Middle widget
-        {             -- Right widgets
+        s.mytaglist,
+        {
+            -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             volume_widget {
                 widget_type = 'arc'
@@ -209,8 +200,7 @@ awful.screen.connect_for_each_screen(function(s)
             }),
             mykeyboardlayout,
             battery_widget,
-            wibox.widget.systray(),
-            s.mylayoutbox,
+            wibox.widget.systray()
         },
     }
     --- To start on thrid tag
@@ -542,8 +532,8 @@ awful.spawn("xset s noblank")
 -- Autostart Applications
 awful.spawn.with_shell("compton")
 awful.spawn.with_shell("xrandr --output HDMI-0 --rotate right; sleep 1")
-awful.spawn("feh --bg-fill /media/Github/sys/wallpaper/bg1.jpg --bg-fill /media/Github/sys/wallpaper/bg2.jpg")
 
+awful.spawn("nm-applet")
 
 -- Terminal with commands
 local first_screen = screen[0]
@@ -558,3 +548,5 @@ awful.spawn.with_shell("gnome-terminal -- zsh -c 'htop; exec bash'", { tag = thr
 
 -- Gaps between windows
 beautiful.useless_gap = 5
+
+require("widget.blur.bgblur")
