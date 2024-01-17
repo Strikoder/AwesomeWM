@@ -31,6 +31,7 @@ if awesome.startup_errors then
     })
 end
 
+
 -- Handle runtime errors after startup
 do
     local in_error = false
@@ -52,6 +53,8 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+--naughty.notify({ text = "Theme loaded: " .. gears.filesystem.get_themes_dir() })
+--
 
 -- This is used later as the default terminal and editor to run.
 terminal = "gnome-terminal"
@@ -129,7 +132,11 @@ local function set_wallpaper(s)
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
+--
+local placeholder = wibox.widget {
+    widget = wibox.widget.textbox,
+    text = "",
+}
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
@@ -152,7 +159,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
     }
 
     -- Create a tasklist widget
@@ -173,6 +180,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
+        expand = "none",
         {
             -- Left widgets
             layout = wibox.layout.fixed.horizontal,
