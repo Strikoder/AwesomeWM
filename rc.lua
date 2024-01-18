@@ -1,4 +1,4 @@
---- My custom
+-- My custom
 pcall(require, "luarocks.loader")
 local brightness_widget = require("widget.brightness-widget.brightness")
 local cpu_widget = require("widget.cpu-widget.cpu-widget")
@@ -157,10 +157,31 @@ awful.screen.connect_for_each_screen(function(s)
         awful.button({}, 5, function() awful.layout.inc(-1) end)))
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
-        screen  = s,
-        filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons,
+        screen          = s,
+        filter          = awful.widget.taglist.filter.all,
+        buttons         = taglist_buttons,
+        widget_template = {
+            {
+                {
+                    {
+                        id = 'text_role',
+                        widget = wibox.widget.textbox,
+                    },
+                    {
+                        id     = 'square_role', -- Add an imagebox to serve as the indicator
+                        widget = wibox.widget.imagebox,
+                    },
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                left = 10,
+                right = 10,
+                widget = wibox.container.margin
+            },
+            id = 'background_role',
+            widget = wibox.container.background,
+        },
     }
+
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {
