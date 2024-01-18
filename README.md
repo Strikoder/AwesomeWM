@@ -5,11 +5,14 @@ I've recently transitioned to using Linux and Neovim (big thanks to ThePrimeagen
 
 Horizontal monitor
 
-![Horizontal monitor](https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/FirstMonitor.png)
+![Horizontal monitor](https://github.com/Strikoder/CoolsomeWM/blob/main/Screenshots/FirstMonitor.png?raw=true)
+![Horizontal monitor without blur](https://github.com/Strikoder/CoolsomeWM/blob/main/Screenshots/FirstMonitorWithoutBlur.png?raw=true)
+
+
 
 Vertical monitor
 
-![Vertical monitor](https://github.com/Strikoder/AwesomeWM/blob/main/Screenshots/SecondMonitor.png)
+![Vertical monitor](https://github.com/Strikoder/CoolsomeWM/blob/main/Screenshots/SecondMonitor.png?raw=true)
 
 ## Getting Started
 Here's how you can set up my AwesomeWM configuration:
