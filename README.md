@@ -1,5 +1,6 @@
 # AwesomeWM Minimal Setup
 
+<div align=center>
 
 <a href="https://awesomewm.org/"><img alt="AwesomeWM Logo" height="150" src="https://upload.wikimedia.org/wikipedia/commons/0/07/Awesome_logo.svg"></a>
 
