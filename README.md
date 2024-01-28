@@ -1,10 +1,5 @@
 # AwesomeWM Minimal Setup
 
-<div align="center">
-     <h1>Awesome Dotfiles</h1>
- </div>
-
-<div align=center>
 
 <a href="https://awesomewm.org/"><img alt="AwesomeWM Logo" height="150" src="https://upload.wikimedia.org/wikipedia/commons/0/07/Awesome_logo.svg"></a>
 
