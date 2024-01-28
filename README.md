@@ -1,4 +1,6 @@
-# AwesomeWM Minimal Setup
+<div align="center">
+     <h1>AwesomeWM Minimal Setup</h1>
+</div>
 
 <div align=center>
 
