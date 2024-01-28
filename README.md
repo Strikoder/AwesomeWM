@@ -1,4 +1,19 @@
 # AwesomeWM Minimal Setup
+
+<div align="center">
+     <h1>Awesome Dotfiles</h1>
+ </div>
+
+<div align=center>
+
+<a href="https://awesomewm.org/"><img alt="AwesomeWM Logo" height="150" src="https://upload.wikimedia.org/wikipedia/commons/0/07/Awesome_logo.svg"></a>
+
+<div align="center">
+    <img src ="https://img.shields.io/badge/Awesome-WM-blue?style=for-the-badge&logo=lua&logoColor=red&color=red"/>
+    <img src ="https://img.shields.io/badge/Ubuntu-22.02-green?style=for-the-badge&logo=Ubuntu&logoColor=red&color=blue"/>
+</div>
+
+
 Welcome to my AwesomeWM configuration repository! This setup is tailored for a dual-monitor setup and includes a range of gadgets that enhance the AwesomeWM experience. 
 I've recently transitioned to using Linux and Neovim (big thanks to ThePrimeagen! ❤️). So plz do not judge me, as I'm still exploring and learning :3
 
