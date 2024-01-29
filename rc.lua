@@ -562,7 +562,8 @@ awful.spawn("xset s noblank")
 awful.spawn.with_shell("compton")
 awful.spawn.with_shell("xrandr --output HDMI-0 --rotate right; sleep 1")
 
-awful.spawn("nm-applet")
+-- Wifi
+--awful.spawn("nm-applet")
 
 -- Terminal with commands
 local first_screen = screen[0]
