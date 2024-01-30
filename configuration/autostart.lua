@@ -24,7 +24,8 @@ local function autostart_apps()
     helpers.run.run_once_pgrep("xset r rate 200 50")
     -- lockscreen
     helpers.run.run_once_pgrep("xautolock -time 10 -locker '$HOME/.config/awesome/utilities/lock' && echo mem ? /sys/power/state")
-    -- helpers.run.run_once_grep("nm-applet")
+    -- Wifi
+    helpers.run.run_once_grep("nm-applet")
 end
 
 autostart_apps()

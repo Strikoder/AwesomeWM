@@ -43,7 +43,7 @@ theme.grey_fg = "#3e4041"
 theme.grey_fg2 = "#484a4b"
 theme.light_grey = "#505253"
 
-theme.transparent = "#00000000"
+theme.transparent = "#000000aa"
 
 --- Black
 theme.color0 = "#232526"
@@ -80,14 +80,11 @@ theme.color15 = "#f2f4f5"
 -- amber
 theme.amber = "#FBC02D"
 
--- title
-theme.color20 = "#1A1B26"
-
 --- Background Colors
-theme.bg_normal = theme.black
-theme.bg_focus = theme.black
-theme.bg_urgent = theme.black
-theme.bg_minimize = theme.black
+theme.bg_normal = theme.transparent
+theme.bg_focus = theme.transparent
+theme.bg_urgent = theme.transparent
+theme.bg_minimize = theme.transparent
 
 --- Foreground Colors
 theme.fg_normal = theme.white
@@ -115,11 +112,11 @@ theme.press_event = "#ffffff" .. "15"
 theme.release_event = "#ffffff" .. "10"
 
 --- Widgets
-theme.widget_bg = "#1b1d1e"
+theme.widget_bg = theme.transparent
 
 
 --- Wibar
-theme.wibar_bg = "#101213"
+theme.wibar_bg = theme.transparent
 theme.wibar_height = dpi(35)
 
 --- Wallpapers
@@ -172,7 +169,7 @@ theme.snap_bg = theme.color8
 theme.snap_shape = helpers.ui.rrect(0)
 
 --- Main Menu
-theme.main_menu_bg = theme.lighter_black
+theme.main_menu_bg = theme.transparent
 
 -- bar
 theme.bar_height = 40
@@ -227,12 +224,6 @@ theme.layoutlist_bg_selected = theme.widget_bg
 
 --- Gaps
 theme.useless_gap = dpi(2)
-
---- Systray
-theme.systray_icon_size = dpi(30)
-theme.systray_icon_spacing = dpi(10)
-theme.bg_systray = theme.wibar_bg
---- theme.systray_max_rows = 2
 
 --- Tabs
 theme.mstab_bar_height = dpi(60)
