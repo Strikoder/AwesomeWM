@@ -1,5 +1,5 @@
 local awful = require("awful")
-local names = {"󰃚", "󰝥", "󰝥", "󰝥", "󰝥"}
+local names = { "󰃚", "󰃚", "󰝥", "󰝥", "󰝥", "󰝥" }
 --- Tags
 --- ~~~~
 

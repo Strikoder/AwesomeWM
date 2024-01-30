@@ -1,4 +1,3 @@
-
 pcall(require, "luarocks.loader")
 local gears = require("gears")
 local beautiful = require("beautiful")

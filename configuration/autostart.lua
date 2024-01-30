@@ -7,25 +7,33 @@ local function autostart_apps()
     --- Compositor
     helpers.run.check_if_running("picom", nil, function()
         awful.spawn("picom --config " .. config_dir ..
-                        "configuration/picom.conf -b", false)
+            "configuration/picom.conf -b", false)
     end)
 
-    --- Music Server
-    helpers.run.run_once_grep("mpd")
-    helpers.run.run_once_grep("mpDris2")
     --- xrdb
     helpers.run.run_once_pgrep("xrdb merge $HOME/.Xresources")
     --- Polkit Agent
     helpers.run.run_once_pgrep(
         "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
-    -- clipboard
-    helpers.run.run_once_grep("greenclip daemon")
     -- cursor speed
     helpers.run.run_once_pgrep("xset r rate 200 50")
-    -- lockscreen
-    helpers.run.run_once_pgrep("xautolock -time 10 -locker '$HOME/.config/awesome/utilities/lock' && echo mem ? /sys/power/state")
     -- Wifi
     helpers.run.run_once_grep("nm-applet")
+
+    -- Add keyboard layouts
+    awful.spawn("setxkbmap -layout us,ru,ar -option 'grp:alt_shift_toggle'")
+
+    -- Prevent from sleeping
+    awful.spawn("xset s off")
+    awful.spawn("xset -dpms")
+    awful.spawn("xset s noblank")
+
+    -- 2 monitor
+    awful.spawn.with_shell("xrandr --output HDMI-0 --rotate right; sleep 1")
+
+    awful.spawn.with_shell("gnome-terminal -- zsh -c 'neofetch; exec bash'", { tag = thrid_tag })
+    awful.spawn.with_shell("gnome-terminal -- zsh -c 'cmatrix; exec bash'", { tag = thrid_tag })
+    awful.spawn.with_shell("gnome-terminal -- zsh -c 'htop; exec bash'", { tag = thrid_tag })
 end
 
 autostart_apps()

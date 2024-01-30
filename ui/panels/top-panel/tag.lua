@@ -15,12 +15,12 @@ local modkey = "Mod4"
 local get_taglist = function(s)
     -- Taglist buttons
     local taglist_buttons = gears.table.join(
-                                awful.button({}, 1,
-                                             function(t) t:view_only() end),
-                                awful.button({modkey}, 1, function(t)
+        awful.button({}, 1,
+            function(t) t:view_only() end),
+        awful.button({ modkey }, 1, function(t)
             if client.focus then client.focus:move_to_tag(t) end
         end), awful.button({}, 3, awful.tag.viewtoggle),
-                                awful.button({modkey}, 3, function(t)
+        awful.button({ modkey }, 3, function(t)
             if client.focus then client.focus:toggle_tag(t) end
         end), awful.button({}, 4, function(t)
             awful.tag.viewnext(t.screen)
@@ -31,8 +31,8 @@ local get_taglist = function(s)
     local the_taglist = awful.widget.taglist({
         screen = s,
         filter = awful.widget.taglist.filter.all,
-        style = {shape = gears.shape.circle},
-        layout = {spacing = dpi(20), layout = wibox.layout.fixed.horizontal},
+        style = { shape = gears.shape.circle },
+        layout = { spacing = dpi(20), layout = wibox.layout.fixed.horizontal },
         widget_template = {
             {
                 {
@@ -48,7 +48,7 @@ local get_taglist = function(s)
                     margins = dpi(6),
                     widget = wibox.container.margin
                 },
-                bg = beautiful.widget_bg,
+                bg = beautiful.transparent,
                 widget = wibox.container.background
             },
             id = "background_role",
@@ -60,13 +60,13 @@ local get_taglist = function(s)
                     if #c3:clients() > 0 then
                         awesome.emit_signal("bling::tag_preview::update", c3)
                         awesome.emit_signal("bling::tag_preview::visibility", s,
-                                            true)
+                            true)
                         -- awesome.emit_signal("bling::task_preview::visibility", s, true, c3)
                     end
                 end)
                 self:connect_signal("mouse::leave", function()
                     awesome.emit_signal("bling::tag_preview::visibility", s,
-                                        false)
+                        false)
                     -- awesome.emit_signal("bling::task_preview::visibility", s, false, c3)
                 end)
 

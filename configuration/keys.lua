@@ -1,12 +1,7 @@
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 local naughty = require("naughty")
-local decorations = require("ui.decorations")
-local bling = require("modules.bling")
-local playerctl_daemon = require("signal.playerctl")
-local machi = require("modules.layout-machi")
 local helpers = require("helpers")
 local apps = require("configuration.apps")
 local menubar = require("menubar")
@@ -55,7 +50,7 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ mod, ctrl }, "r", awesome.restart, { description = "reload awesome", group = "WM" }),
 
 	--- Quit awesome
-	awful.key({ mod, ctrl }, "q", awesome.quit, { description = "quit awesome", group = "WM" }),
+	awful.key({ mod, shift }, "q", awesome.quit, { description = "quit awesome", group = "WM" }),
 
 	--- Show help
 	awful.key({ mod }, "F1", hotkeys_popup.show_help, { description = "show Help", group = "WM" }),

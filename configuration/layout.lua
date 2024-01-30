@@ -1,9 +1,4 @@
 local awful = require("awful")
-local bling = require("modules.bling")
-
-
---- Custom Layouts
-local mstab = bling.layout.mstab
 
 --- Set the layouts
 tag.connect_signal(
@@ -11,8 +6,7 @@ tag.connect_signal(
     function()
         awful.layout.append_default_layouts(
             {
-                awful.layout.suit.tile,
-                mstab,
+                awful.layout.suit.tile
             }
         )
     end

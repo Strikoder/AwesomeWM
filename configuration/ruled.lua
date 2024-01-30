@@ -81,18 +81,7 @@ ruled.client.connect_signal("request::rules", function()
         },
         properties = {placement = helpers.client.centered_client_placement}
     })
-
-    --- Music clients (usually a terminal running ncmpcpp)
-    ruled.client.append_rule({
-        rule_any = {class = {"music"}, instance = {"music"}},
-        properties = {
-            floating = true,
-            width = screen_width * 0.40,
-            height = screen_height * 0.42,
-            placement = helpers.client.centered_client_placement
-        }
-    })
-
+   
 	-- mpv
 	ruled.client.append_rule({
         rule_any = {class = {"mpv"}, instance = {"mpv"}},

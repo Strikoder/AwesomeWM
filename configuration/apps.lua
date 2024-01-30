@@ -8,23 +8,15 @@ return {
     default = {
         --- Default terminal emulator
         terminal = "gnome-terminal",
-        --- Default music client
-        music_player = "alacritty --class music -e ncmpcpp",
         --- Default text editor
         text_editor = "nvim",
         --- Default code editor
         code_editor = "code",
         --- Default network manager
-        network_manager = "nm-applet",
-        --- Default clipboard
-        clip = utils_dir .. "/clip/clip.sh",
+        --network_manager = "nm-applet",
         --- Default launcher
         launcher = utils_dir .. "/launcher/launcher.sh",
-        --- recorder
-        recorder = "SimpleScreenRecorder",
-        --- Default rofi global menu
-        app_launcher = "rofi -no-lazy-grab -show drun -modi drun -theme " ..
-            config_dir .. "configuration/rofi.rasi",
+
     },
 
     --- List of binaries/shell scripts that will execute for a certain task

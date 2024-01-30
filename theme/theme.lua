@@ -10,7 +10,6 @@ local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local helpers = require("helpers")
 local icons = require("icons")
-local apps = require("configuration.apps")
 
 --- ░█▀▀░█▀█░█▀█░▀█▀░█▀▀
 --- ░█▀▀░█░█░█░█░░█░░▀▀█
@@ -82,21 +81,20 @@ theme.amber = "#FBC02D"
 
 --- Background Colors
 theme.bg_normal = theme.transparent
-theme.bg_focus = theme.transparent
+theme.bg_focus = theme.color7
 theme.bg_urgent = theme.transparent
 theme.bg_minimize = theme.transparent
 
 --- Foreground Colors
-theme.fg_normal = theme.white
-theme.fg_focus = theme.accent
+theme.fg_normal = theme.color7
+theme.fg_focus = theme.transparent
 theme.fg_urgent = theme.color1
-theme.fg_minimize = theme.color0
+theme.fg_minimize = theme.transparent
 
 --- Accent colors
 function theme.random_accent_color()
     local accents = {
-        theme.color9, theme.color10, theme.color11, theme.color12,
-        theme.color13, theme.color14
+        theme.transparent
     }
 
     local i = math.random(1, #accents)
@@ -121,15 +119,7 @@ theme.wibar_height = dpi(35)
 
 --- Wallpapers
 theme.wallpaper = gears.surface.load_uncached(
-                      gfs.get_configuration_dir() .. "theme/assets/peace.png")
---- theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/dark.png")
---- theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/dark2.png")
-
---- Image Assets
-theme.pfp = gears.surface.load_uncached(gfs.get_configuration_dir() ..
-                                            "theme/assets/pfp.png")
-theme.music = gears.surface.load_uncached(
-                  gfs.get_configuration_dir() .. "theme/assets/music.png")
+    gfs.get_configuration_dir() .. "theme/assets/peace.png")
 
 --- Layout
 --- You can use your own layout icons like this:
@@ -137,14 +127,7 @@ theme.layout_floating = icons.floating
 theme.layout_max = icons.max
 -- theme.layout_tile = icons.tile
 theme.layout_tile = gears.color.recolor_image(icons.tile, theme.accent)
-theme.layout_dwindle = icons.dwindle
-theme.layout_centered = icons.centered
-theme.layout_mstab = icons.mstab
-theme.layout_equalarea = icons.equalarea
-theme.layout_machi = icons.machi
-
 --- Icon Theme
---- Define the icon theme for application icons. If not set then the icons
 --- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = "Tokyo Night-SE"
 
@@ -174,13 +157,8 @@ theme.main_menu_bg = theme.transparent
 -- bar
 theme.bar_height = 40
 
---- Tooltip
-theme.tooltip_bg = theme.lighter_black
-theme.tooltip_fg = theme.white
-theme.tooltip_font = theme.font_name .. "Regular 10"
-
 --- Hotkeys Pop Up
-theme.hotkeys_bg = theme.black
+theme.hotkeys_bg = theme.transparent
 theme.hotkeys_fg = theme.white
 theme.hotkeys_modifiers_fg = theme.white
 theme.hotkeys_font = theme.font_name .. "Medium 12"
@@ -189,7 +167,7 @@ theme.hotkeys_shape = helpers.ui.rrect(theme.border_radius)
 theme.hotkeys_group_margin = dpi(50)
 
 --- Tag list
-theme.taglist_bg = theme.accent
+theme.taglist_bg = theme.transparent
 theme.taglist_bg_focus = theme.widget_bg
 theme.taglist_fg_focus = theme.color3
 theme.taglist_bg_urgent = theme.widget_bg
@@ -223,24 +201,7 @@ theme.layoutlist_shape_selected = helpers.ui.rrect(theme.bbleachbitorder_radius)
 theme.layoutlist_bg_selected = theme.widget_bg
 
 --- Gaps
-theme.useless_gap = dpi(2)
-
---- Tabs
-theme.mstab_bar_height = dpi(60)
-theme.mstab_bar_padding = dpi(0)
-theme.mstab_border_radius = dpi(6)
-theme.mstab_bar_disable = true
-theme.tabbar_disable = true
-theme.tabbar_style = "modern"
-theme.tabbar_bg_focus = theme.black
-theme.tabbar_bg_normal = theme.color0
-theme.tabbar_fg_focus = theme.color0
-theme.tabbar_fg_normal = theme.color15
-theme.tabbar_position = "buttom"
-theme.tabbar_AA_radius = 0
-theme.tabbar_size = 0
-theme.mstab_bar_ontop = true
--- theme.mstab_dont_resize_slaves = false
+theme.useless_gap = dpi(3)
 
 --- Notifications
 theme.notification_spacing = dpi(4)
@@ -250,13 +211,5 @@ theme.notification_bg_alt = theme.lighter_black
 --- Notif center
 theme.notif_center_notifs_bg = theme.one_bg2
 theme.notif_center_notifs_bg_alt = theme.one_bg3
-
-
---- Layout Machi
-theme.machi_switcher_border_color = theme.lighter_black
-theme.machi_switcher_border_opacity = 0.25
-theme.machi_editor_border_color = theme.lighter_black
-theme.machi_editor_border_opacity = 0.25
-theme.machi_editor_active_opacity = 0.25
 
 return theme
